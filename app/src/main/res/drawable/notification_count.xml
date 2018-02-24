@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@mipmap/ic_notification"
+        android:width="30dp"
+        android:height="30dp"
+        android:gravity="center" />
+
+    <item
+        android:id="@+id/ic_group_count"
+        android:drawable="@android:color/transparent" />
+
+</layer-list>

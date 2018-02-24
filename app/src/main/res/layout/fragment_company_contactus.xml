@@ -1,0 +1,44 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.meseret.niqugebere.companies.fragments.CompanyContactusFragment">
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_margin="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <TextView
+           android:id="@+id/company_region"
+           android:layout_margin="10dp"
+           android:textSize="18sp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" />
+
+       <TextView
+           android:id="@+id/company_zone"
+           android:layout_margin="10dp"
+           android:textSize="18sp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:id="@+id/company_woreda"
+           android:layout_margin="10dp"
+           android:textSize="18sp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:id="@+id/company_special_name"
+           android:layout_margin="10dp"
+           android:textSize="18sp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:id="@+id/company_phone"
+           android:layout_margin="10dp"
+           android:textSize="18sp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" />
+   </LinearLayout>
+</FrameLayout>

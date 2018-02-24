@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.meseret.niqugebere.profile.cfsc.cfscFragments.ShowSupply">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/custom_tab_layout_height"
+        android:layout_gravity="bottom"
+        app:tabMode="scrollable"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/navtextcolor"
+        app:tabSelectedTextColor="@color/navback"
+        app:tabTextColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/list_your_sypply"
+        android:layout_below="@id/tabs"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:textColor="@color/navtextcolor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/tabs"
+        android:id="@+id/show_suppply_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+    <ProgressBar
+        android:id="@+id/supplier_pr"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

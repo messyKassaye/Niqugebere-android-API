@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/navtextcolor"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/apply_top_layout"
+    android:padding="10dp"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textColor="@color/navtextcolor"
+        android:textSize="20sp"
+        android:text="@string/apply_title"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/supply_main_layout"
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:layout_below="@id/apply_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+         <TextView
+             android:id="@+id/tell_us_how_much_you_need"
+             android:text="@string/tell_us_how_much_you_need"
+             android:textColor="@color/bg"
+             android:textSize="20sp"
+             android:gravity="left"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+            android:theme="@style/MyTextInputLayout"
+            android:textColorHint="@color/hint_color"
+            android:paddingTop="5dp"
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/supply_quantity"
+                android:textColor="@color/bg"
+                android:textColorHint="@color/hint_color"
+                android:textCursorDrawable="@null"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:hint="@string/how_much_you_need"
+                android:background="@drawable/text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/apply_btn"
+            android:layout_margin="5dp"
+            android:textAllCaps="true"
+            android:text="@string/apply_quantity"
+            android:textColor="@color/navtextcolor"
+            android:background="@drawable/button_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/supply_success_shower"
+        android:textSize="18sp"
+        android:textColor="@color/bg"
+        android:gravity="left"
+        android:padding="3dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/supply_pr"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

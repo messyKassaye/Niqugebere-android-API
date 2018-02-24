@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.meseret.niqugebere.profile.transporter.transporterFragments.TransporterHomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:gravity="left"
+        android:textColor="@color/bg"
+        android:textSize="18dp"
+        android:layout_height="wrap_content"
+        android:text="@string/transport_home_info" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/transport_home_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.meseret.niqugebere.companies.CompaniesProductDetails">
+    <include layout="@layout/home_toolbar"  android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/toolbar"/>
+   <TextView
+       android:padding="10dp"
+       android:id="@+id/selected_product_info"
+       android:layout_below="@+id/toolbar"
+       android:textColor="@color/navtextcolor"
+       android:textSize="18sp"
+       android:gravity="left"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/selected_product_info"
+        android:id="@+id/selected_product_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

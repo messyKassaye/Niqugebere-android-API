@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/call"
+        android:icon="@mipmap/ic_call_icon"
+        app:showAsAction="always"
+        android:title="@string/call" />
+
+    <item
+        android:id="@+id/language_selecter"
+        android:icon="@mipmap/ic_globe_icon"
+        app:showAsAction="always"
+        android:title="@string/language" />
+</menu>

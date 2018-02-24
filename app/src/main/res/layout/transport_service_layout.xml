@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="10dp"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tell_us_about_your_car"
+        android:textSize="18sp"
+        android:textColor="@color/navtextcolor"
+        android:gravity="left"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/tell_us_about_your_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Spinner
+        android:id="@+id/transporation_car_types"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_spinner_background"
+        android:dropDownWidth="wrap_content"
+        android:spinnerMode="dropdown" />
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:theme="@style/MyTextInputLayout"
+        android:textColorHint="@color/hint_color"
+        android:paddingTop="5dp"
+        android:id="@+id/input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/plate_number"
+            android:textColor="@color/navtextcolor"
+            android:textColorHint="@color/hint_color"
+            android:textCursorDrawable="@null"
+            android:inputType="text"
+            android:paddingLeft="15dp"
+            android:hint="@string/plate_number"
+            android:background="@drawable/text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <TextView
+        android:id="@+id/transportation_error"
+        android:layout_margin="5dp"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/tr_next"
+        android:layout_margin="20dp"
+        android:text="@string/next"
+        android:textColor="@color/navtextcolor"
+        android:background="@drawable/button_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

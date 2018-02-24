@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.meseret.niqugebere.fragments.PullFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/produc_type_textview"
+            android:text="@string/select_product_type_you_need_to_buy"
+            android:textColor="@color/navtextcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/post_product_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/product_sub_category_textview"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/navtextcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_sub_category_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/current_location_textview"
+            android:text="@string/tell_us_where_you_live"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/navtextcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+         <android.support.v7.widget.RecyclerView
+             android:id="@+id/current_location_recyclerview"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+         </android.support.v7.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/pull_btn"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
+            android:text="@string/pull"
+            android:textColor="@color/navtextcolor"
+            android:background="@drawable/button_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</FrameLayout>

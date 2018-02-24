@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.meseret.niqugebere.profile.transporter.transporterFragments.AddVehiclesFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:id="@+id/add_info"
+            android:textColor="@color/bg"
+            android:textSize="20sp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_info" />
+        <!-- login editext layout-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+            android:theme="@style/MyTextInputLayout"
+            android:textColorHint="@color/hint_color"
+            android:paddingTop="5dp"
+            android:id="@+id/input_layout_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/vehicle_plate_no"
+                android:hint="@string/plate_no"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:background="@drawable/text_field"
+                android:textColor="@color/bg"
+                android:textColorHint="@color/hint_color"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+            android:theme="@style/MyTextInputLayout"
+            android:textColorHint="@color/hint_color"
+            android:paddingTop="5dp"
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/vehicle_capacity"
+                android:textColor="@color/bg"
+                android:textCursorDrawable="@null"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:hint="@string/capacity"
+                android:textColorHint="@color/hint_color"
+                android:background="@drawable/text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/add_vehicles_error_text"
+            android:visibility="gone"
+            android:textSize="18sp"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/add_vehicles_btn"
+            android:layout_marginTop="20dp"
+            android:text="@string/add"
+            android:textColor="@color/navtextcolor"
+            android:background="@drawable/button_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/add_vehicles_pr"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.meseret.niqugebere">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".companies.CFSCDetailsActivity"
+            android:label="@string/title_activity_cfscdetails"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".companies.CompaniesProductDetails" />
+        <activity android:name=".companies.ProductOrderActivity" />
+        <activity android:name=".profile.Conformation" />
+        <activity
+            android:name=".profile.cfsc.CFSCProfile"
+            android:label="@string/title_activity_cfscprofile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".profile.suppliers.SuppliersProfile"
+            android:label="@string/title_activity_suppliers_profile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".profile.transporter.TransporterProfileActivity"
+            android:label="@string/title_activity_transporter_profile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".profile.agrodealer.AgroDealerProfileActivity"
+            android:label="@string/title_activity_agro_dealer_profile"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".profile.cfsc.UnfinishedActivity" />
+        <activity android:name=".profile.cfsc.FloatingButtonActivity" />
+        <activity android:name=".services.ServicesActivity" />
+        <activity
+            android:name=".MarketDetailActivity"
+            android:label="@string/title_activity_market_detail"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".profile.cfsc.ShowSupplyRequesterActivity"
+            android:label="@string/title_activity_show_supplier"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".systemadmin.SystemAdminActivity" />
+        <activity android:name=".profile.cfsc.DemandAwardingActivity"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.meseret.niqugebere.companies.ProductOrderActivity">
+    <include layout="@layout/home_toolbar"  android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/order_toolbar"/>
+    <LinearLayout
+        android:id="@+id/order_layout"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_below="@id/order_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+       <TextView
+           android:id="@+id/order_info"
+           android:textSize="18sp"
+           android:textAllCaps="false"
+           android:textColor="@color/navtextcolor"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/order_full_name_or_customer_id"
+            android:textColor="@color/navtextcolor"
+            android:textCursorDrawable="@null"
+            android:paddingLeft="15dp"
+            android:hint="@string/custemer_id_name"
+            android:textColorHint="@color/hint_color"
+            android:background="@drawable/text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/order_phone_no"
+            android:textColor="@color/navtextcolor"
+            android:textCursorDrawable="@null"
+            android:paddingLeft="15dp"
+            android:hint="@string/order_phone_no"
+            android:textColorHint="@color/hint_color"
+            android:background="@drawable/text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/order_quantity"
+            android:textColor="@color/navtextcolor"
+            android:textCursorDrawable="@null"
+            android:paddingLeft="15dp"
+            android:hint="@string/order_quantity"
+            android:textColorHint="@color/hint_color"
+            android:background="@drawable/text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/order_woreda"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_spinner_background"
+            android:dropDownWidth="wrap_content"
+            android:spinnerMode="dropdown" />
+        <TextView
+            android:id="@+id/order_error"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:textSize="18sp"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/send_order"
+            android:textColor="@color/navtextcolor"
+            android:textAllCaps="false"
+            android:text="@string/send_order"
+            android:background="@drawable/button_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!--transport layout-->
+    <LinearLayout
+        android:visibility="gone"
+        android:padding="10dp"
+        android:layout_below="@id/order_toolbar"
+        android:orientation="vertical"
+        android:id="@+id/transport_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/transport_info"
+            android:textSize="18sp"
+            android:textColor="@color/navtextcolor"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/skip_transport"
+            android:layout_margin="5dp"
+            android:textSize="20dp"
+            android:text="@string/skip"
+            android:gravity="right"
+            android:textColor="@color/navback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/transporter_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+    <!--end of transport layout-->
+
+    <ProgressBar
+        android:id="@+id/order_pr"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

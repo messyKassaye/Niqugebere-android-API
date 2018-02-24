@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- end of sign in container layout-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/sign_in_containerlayout"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/singup_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+            <!--<TextView
+                android:id="@+id/signup_info"
+                android:text="@string/create_account_info"
+                android:textColor="@color/navtextcolor"
+                android:gravity="left"
+                android:layout_margin="5dp"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />-->
+            <!-- login editext layout-->
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="5dp"
+                android:theme="@style/MyTextInputLayout"
+                android:textColorHint="@color/hint_color"
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/first_name"
+                    android:textColor="@color/white_textcolor"
+                    android:textCursorDrawable="@null"
+                    android:paddingLeft="15dp"
+                    android:hint="@string/full_name"
+                    android:textColorHint="@color/hint_color"
+                    android:background="@drawable/text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"  />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:theme="@style/MyTextInputLayout"
+                android:textColorHint="@color/hint_color"
+                android:paddingTop="5dp"
+                android:id="@+id/input_layout_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:theme="@style/MyTextInputLayout"
+                android:textColorHint="@color/hint_color"
+                android:paddingTop="5dp"
+                android:id="@+id/input_layout_license"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/signup_tin_no"
+                    android:hint="@string/user_name"
+                    android:textCursorDrawable="@null"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/text_field"
+                    android:textColor="@color/navtextcolor"
+                    android:textColorHint="@color/hint_color"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp" />
+            </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                           android:layout_marginTop="10dp"
+                           android:theme="@style/MyTextInputLayout"
+                           android:textColorHint="@color/hint_color"
+                           android:paddingTop="5dp"
+                           android:id="@+id/input_layout_password"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content">
+
+                           <EditText
+                               android:id="@+id/phone_no"
+                               android:textColor="@color/navtextcolor"
+                               android:textColorHint="@color/hint_color"
+                               android:textCursorDrawable="@null"
+                               android:inputType="text"
+                               android:paddingLeft="15dp"
+                               android:hint="@string/phone_no"
+                               android:background="@drawable/text_field"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content" />
+                       </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/select_type_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+            <!--<TextView
+                android:id="@+id/registration_type"
+                android:text="@string/registration_type"
+                android:layout_margin="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/navtextcolor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />-->
+            <Spinner
+                android:id="@+id/registration_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_spinner_background"
+                android:dropDownWidth="wrap_content"
+                android:spinnerMode="dropdown" />
+            <TextView
+                android:id="@+id/first_signup_error"
+                android:layout_margin="5dp"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+            <Button
+                android:id="@+id/next_btn"
+                android:layout_marginTop="20dp"
+                android:text="@string/next"
+                android:textColor="@color/navtextcolor"
+                android:background="@drawable/button_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

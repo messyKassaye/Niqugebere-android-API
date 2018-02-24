@@ -1,0 +1,160 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.meseret.niqugebere.fragments.HomeFragment">
+
+    <ScrollView
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/nested_scrollview"
+        android:scrollbars="vertical"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- viewpager slider layout-->
+            <LinearLayout
+                android:id="@+id/sponsor_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/sponsors_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"/>
+            </LinearLayout>
+            <!-- end of viewpager slider layout-->
+
+
+            <!-- top mall layout-->
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/topmalls_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/topmalls_top_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/top_cfsc"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/navtextcolor"
+                        android:textAllCaps="true"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="@string/viewall"
+                        android:id="@+id/topmall_viewall"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/navback"
+                        android:textAllCaps="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_below="@id/topmalls_top_layout"
+                    android:id="@+id/top_malls_recyclverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+            <!--end of top mall layout-->
+
+
+            <!-- top mall layout-->
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/market_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/market_top_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/top_markets"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/navtextcolor"
+                        android:textAllCaps="true"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="@string/viewall"
+                        android:id="@+id/market_viewall"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/navback"
+                        android:textAllCaps="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_below="@id/market_top_layout"
+                    android:id="@+id/market_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+            <!--end of top mall layout-->
+
+
+            <!-- top mall layout-->
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/top_service_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/top_service_top_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/top_service"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/navtextcolor"
+                        android:textAllCaps="true"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="@string/viewall"
+                        android:id="@+id/service_viewall"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/navback"
+                        android:textAllCaps="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_below="@id/top_service_top_layout"
+                    android:id="@+id/service_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+            <!--end of top mall layout-->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

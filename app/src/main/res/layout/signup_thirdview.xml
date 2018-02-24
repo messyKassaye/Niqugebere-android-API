@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_margin="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/navtextcolor"
+        android:text="@string/final_step"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="10dp"
+        android:theme="@style/MyTextInputLayout"
+        android:textColorHint="@color/hint_color"
+        android:paddingTop="5dp"
+        android:id="@+id/input_layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/password"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textCursorDrawable="@null"
+            android:layout_width="match_parent"
+            android:background="@drawable/text_field"
+            android:textColor="@color/navtextcolor"
+            android:textColorHint="@color/hint_color"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="10dp"
+        android:theme="@style/MyTextInputLayout"
+        android:textColorHint="@color/hint_color"
+        android:paddingTop="5dp"
+        android:id="@+id/irenput_layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/re_password"
+            android:hint="@string/re_password"
+            android:inputType="textPassword"
+            android:textCursorDrawable="@null"
+            android:layout_width="match_parent"
+            android:background="@drawable/text_field"
+            android:textColor="@color/navtextcolor"
+            android:textColorHint="@color/hint_color"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/third_signup_error"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_marginTop="20dp"
+        android:text="@string/signup_btn"
+        android:textColor="@color/navtextcolor"
+        android:background="@drawable/button_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

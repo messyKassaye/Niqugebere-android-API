@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Manage supply">
+        <menu>
+            <item
+                android:id="@+id/cfsc_post_supply"
+                android:icon="@drawable/supply"
+                android:title="@string/post_supply" />
+            <item
+                android:id="@+id/cfsc_show_post_supply"
+                android:icon="@drawable/show_supply"
+                android:title="@string/show_post" />
+        </menu>
+    </item>
+
+
+
+    <item android:title="Manage demand">
+        <menu>
+            <item
+                android:id="@+id/cfsc_post_demand"
+                android:icon="@drawable/post_demand"
+                android:title="Post demand" />
+            <item
+                android:id="@+id/cfsc_show_demand"
+                android:icon="@drawable/show_demand"
+                android:title="Show demand" />
+        </menu>
+    </item>
+
+    <!-- setting menu -->
+    <item android:title="My Inventory">
+        <menu>
+            <item
+                android:id="@+id/send_inventory"
+                android:icon="@drawable/inventory"
+                android:title="Send inventory" />
+            <item
+                android:id="@+id/inventory_payment"
+                android:icon="@drawable/show_supply"
+                android:title="My payment" />
+        </menu>
+    </item>
+    <!-- end of setting menu -->
+
+    <!-- setting menu -->
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/setting"
+                android:icon="@mipmap/ic_setting"
+                android:title="Setting" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/lgout"
+                android:title="logout" />
+        </menu>
+    </item>
+    <!-- end of setting menu -->
+
+</menu>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Manage path">
+        <menu>
+            <item
+                android:id="@+id/set_path"
+                android:icon="@drawable/supply"
+                android:title="@string/set_path" />
+            <item
+                android:id="@+id/my_path"
+                android:icon="@drawable/show_supply"
+                android:title="@string/show_apth" />
+        </menu>
+    </item>
+
+
+
+    <item android:title="Manage Vehicles">
+        <menu>
+            <item
+                android:id="@+id/add_vehicles"
+                android:icon="@drawable/post_demand"
+                android:title="@string/add_vehicles" />
+            <item
+                android:id="@+id/show_vehicles"
+                android:icon="@drawable/show_demand"
+                android:title="@string/show_vehicles" />
+        </menu>
+    </item>
+
+    <!-- setting menu -->
+    <item android:title="My Transportation">
+        <!--<menu>
+            <item
+                android:id="@+id/send_inventory"
+                android:icon="@drawable/inventory"
+                android:title="Send inventory" />
+            <item
+                android:id="@+id/inventory_payment"
+                android:icon="@drawable/show_supply"
+                android:title="My payment" />
+        </menu>-->
+    </item>
+    <!-- end of setting menu -->
+
+    <!-- setting menu -->
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/setting"
+                android:icon="@mipmap/ic_setting"
+                android:title="Setting" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/lgout"
+                android:title="logout" />
+        </menu>
+    </item>
+    <!-- end of setting menu -->
+
+</menu>

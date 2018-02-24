@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.meseret.niqugebere.profile.cfsc.DemandAwardingActivity">
+  <include layout="@layout/home_toolbar" android:id="@+id/toolbar" android:layout_height="wrap_content" android:layout_width="match_parent"/>
+
+
+    <!-- end of top layout-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/content_layout"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      <ImageView
+          android:id="@+id/supply_product_image"
+          android:padding="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/album_cover_height"
+          android:background="?attr/selectableItemBackgroundBorderless"
+          android:clickable="true"
+          android:scaleType="fitXY" />
+      <LinearLayout
+          android:padding="3dp"
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/product_category_name"
+            android:layout_marginBottom="3dp"
+            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/product_sub_category_name"
+            android:layout_marginBottom="3dp"
+            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/supplied_product_name"
+            android:layout_marginBottom="3dp"
+            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/supply_price"
+            android:layout_marginBottom="3dp"
+            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/no_of_appliers"
+            android:layout_marginBottom="3dp"
+            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+      </LinearLayout>
+      <View
+          android:layout_width="match_parent"
+          android:layout_below="@id/content_layout"
+          android:layout_height="1dp"
+          android:layout_marginTop="0.5dp"
+          android:layout_alignParentBottom="true"
+          android:background="@color/hint_color" />
+    </LinearLayout>
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_below="@id/content_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/awarding_info"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/awarding_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/transporter_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+  </LinearLayout>
+<ProgressBar
+    android:id="@+id/award_pr"
+    android:layout_centerInParent="true"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+</RelativeLayout>
