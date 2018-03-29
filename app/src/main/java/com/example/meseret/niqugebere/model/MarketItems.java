@@ -10,13 +10,23 @@ public class MarketItems {
     private String product_name;
     private String unit_price;
     private String product_photo;
+    private String name;
 
-    public MarketItems(String id, String company_id, String product_name, String unit_price, String product_photo) {
+    public MarketItems(String id, String company_id, String product_name, String unit_price, String product_photo, String name) {
         this.id = id;
         this.company_id = company_id;
         this.product_name = product_name;
         this.unit_price = unit_price;
         this.product_photo = product_photo;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {

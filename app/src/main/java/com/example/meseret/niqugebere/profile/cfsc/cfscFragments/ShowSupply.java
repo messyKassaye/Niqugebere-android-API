@@ -112,21 +112,23 @@ public class ShowSupply extends Fragment {
         call.enqueue(new Callback<List<Supplies>>() {
             @Override
             public void onResponse(Call<List<Supplies>> call, Response<List<Supplies>> response) {
-                if (response.body().size()>0){
-                    pr.setVisibility(View.GONE);
-                    for (int i=0;i<response.body().size();i++){
-                        SuppliesAdapterModel model=new SuppliesAdapterModel();
-                        model.setCategory_name(response.body().get(i).getCategory_name());
-                        model.setSub_category_name(response.body().get(i).getSub_category_name());
-                        model.setProduct_photo(response.body().get(i).getProduct_photo());
-                        model.setPrice(response.body().get(i).getPrice());
-                        model.setId(response.body().get(i).getId());
-                        model.setAvailability(response.body().get(i).getAvailability());
-                        model.setTitle(response.body().get(i).getTitle());
-                        list.add(model);
+                if(response.isSuccessful()){
+                    if (response.body().size()>0){
+                        pr.setVisibility(View.GONE);
+                        for (int i=0;i<response.body().size();i++){
+                            SuppliesAdapterModel model=new SuppliesAdapterModel();
+                            model.setCategory_name(response.body().get(i).getCategory_name());
+                            model.setSub_category_name(response.body().get(i).getSub_category_name());
+                            model.setProduct_photo(response.body().get(i).getProduct_photo());
+                            model.setPrice(response.body().get(i).getPrice());
+                            model.setId(response.body().get(i).getId());
+                            model.setAvailability(response.body().get(i).getAvailability());
+                            model.setTitle(response.body().get(i).getTitle());
+                            list.add(model);
+                        }
+                        adapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(adapter);
                     }
-                    adapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapter);
                 }
             }
 

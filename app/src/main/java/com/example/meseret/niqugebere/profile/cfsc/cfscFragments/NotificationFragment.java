@@ -9,13 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.meseret.niqugebere.R;
-import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.DemandNotificationAdapter;
+import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.NotificationRecyclerviewAdapter;
 import com.example.meseret.niqugebere.profile.cfsc.cfscAdapterModel.DemandsAdapterModel;
 import com.example.meseret.niqugebere.profile.cfsc.cfscClient.CFSCClient;
-import com.example.meseret.niqugebere.profile.cfsc.cfscModel.Demands;
+import com.example.meseret.niqugebere.profile.cfsc.cfscModel.Notifications;
 import com.example.meseret.niqugebere.projectstatics.Projectstatics;
 
 import java.util.ArrayList;
@@ -31,11 +30,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * A simple {@link Fragment} subclass.
  */
 public class NotificationFragment extends Fragment {
-    private List<DemandsAdapterModel> list;
-    private DemandNotificationAdapter adapter;
+    private List<Notifications> list;
+    private NotificationRecyclerviewAdapter adapter;
     private RecyclerView recyclerView;
     private SharedPreferences preferences;
     private String token;
+
     public NotificationFragment() {
         // Required empty public constructor
     }
@@ -51,25 +51,20 @@ public class NotificationFragment extends Fragment {
         setToken(preferences.getString("token",""));
 
         list=new ArrayList<>();
-        adapter=new DemandNotificationAdapter(getActivity(),list);
+        adapter=new NotificationRecyclerviewAdapter(getActivity(),list);
         recyclerView=(RecyclerView)view.findViewById(R.id.notification_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         Retrofit retrofit=getUserAPIretrofit();
         CFSCClient client=retrofit.create(CFSCClient.class);
-        Call<List<Demands>> call=client.getDemandNotification(getToken());
-        call.enqueue(new Callback<List<Demands>>() {
+        Call<List<Notifications>> call=client.notificationIndex(getToken());
+        call.enqueue(new Callback<List<Notifications>>() {
             @Override
-            public void onResponse(Call<List<Demands>> call, Response<List<Demands>> response) {
+            public void onResponse(Call<List<Notifications>> call, Response<List<Notifications>> response) {
                 if(response.isSuccessful()){
                     for (int i=0;i<response.body().size();i++){
-                        DemandsAdapterModel model=new DemandsAdapterModel();
-                        model.setProduct_photo(response.body().get(i).getProduct_photo());
-                        model.setTitle(response.body().get(i).getTitle());
-                        model.setCategory_name(response.body().get(i).getCategory_name());
-                        model.setSub_category_name(response.body().get(i).getSub_category_name());
-                        model.setId(response.body().get(i).getId());
-                        model.setPrice(response.body().get(i).getPrice());
-                        model.setTotal_quantity(response.body().get(i).getTotal_quantity());
+                        Notifications model=new Notifications();
+                        model.setNotifable_id(response.body().get(i).getNotifable_id());
+                        model.setNotification_category_id(response.body().get(i).getNotification_category_id());
                         list.add(model);
                     }
                     adapter.notifyDataSetChanged();
@@ -78,7 +73,7 @@ public class NotificationFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Demands>> call, Throwable t) {
+            public void onFailure(Call<List<Notifications>> call, Throwable throwable) {
 
             }
         });

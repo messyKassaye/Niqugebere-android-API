@@ -14,8 +14,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="viewall">View All</string>
-    <string name="top_cfsc">Top Commercial Farm Centers</string>
-    <string name="partners">With collaboration:</string>
+    <string name="top_cfsc">TOP AGRICULTURE BUSINESS COMPANIES</string>
+    <string name="partners">Our partners that we work with:</string>
     <string name="title_activity_cfscdetails">CFSCDetailsActivity</string>
     <string name="english">English</string>
     <string name="amharic">Amharic</string>
@@ -142,7 +142,7 @@
     <string name="upload_text">Upload</string>
     <string name="upload_info_text">Upload your company image</string>
     <string name="top_service">Top services</string>
-    <string name="top_markets">Market centers</string>
+    <string name="top_markets">The Key Input Market Categories</string>
     <string name="profile_image_isnot_added">We detect that you did not uploaded your company profile image.Please add your company profile image</string>
     <string name="title_activity_market_detail">MarketDetailActivity</string>
     <string name="description">Say something about your company. This makes your company more profitable  better than any company</string>
@@ -180,11 +180,12 @@
     <string name="push_describe">add some description...</string>
     <string name="approve">Approve</string>
     <string name="pull">Pull</string>
+
     <string name="select_product_type_you_need_to_buy">Select what type of product you need to buy</string>
     <string name="select_product">Select product</string>
-    <string name="inventory_success">Your inventory is sent successfully. You have payed </string>
+    <string name="inventory_success">Congratulations. your inventory is sent successfully. You have payed </string>
     <string name="select_product_sub_type_you_need_to_buy">Select product category</string>
-    <string name="tell_us_where_you_live">select your current location</string>
+    <string name="tell_us_where_you_live">select your woreda or nearest one to your current location</string>
     <string name="post_success_message">Your product is posted for public. attend the response of your customer and deliver this product for these who need it</string>
     <string name="supply_success_message">Thank you for choosing us. We will deliver the product in a specified date to your company address</string>
     <string name="title_activity_show_supplier">ShowSupplierActivity</string>
@@ -208,4 +209,18 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="product_type">Products to be transported</string>
+    <string name="search_woreda_hine">Search woreda....</string>
+    <string name="push_tin_no">Enter your Tin no</string>
+    <string name="verify_users">Check</string>
+    <string name="product_name">Enter product name</string>
+    <string name="demands">Demands</string>
+    <string name="show_detail">Show details</string>
+    <string name="select_product_type_you_need_to_suply">Select what type product you need to supply</string>
+    <string name="supply_info_values">Post your product as supply for your peers and for public</string>
+    <string name="give_them_your_price">Tell us your transportation price</string>
+    <string name="pull_info_values">Pulling technology in niqugebere context is finding customers needs around their nearest area.Tell us your need and let\'s provide you ):</string>
+    <string name="push_info_value">Post your product to your customers or to your peers</string>
+    <string name="select_product_type_you_need_to_invent">Select a prodcut type you need to send as inventory</string>
+    <string name="select_product_type_you_need_to_post">Select what type of product you are going to send</string>
+    <string name="push_info_text">Pushing is uploading(sending) your product to your peers,customers and for public users. Please enter your tin no and send your product now</string>
 </resources>

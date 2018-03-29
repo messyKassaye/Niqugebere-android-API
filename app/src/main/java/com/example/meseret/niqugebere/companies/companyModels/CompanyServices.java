@@ -5,40 +5,43 @@ package com.example.meseret.niqugebere.companies.companyModels;
  */
 
 public class CompanyServices {
-    private String service_id;
-    private String service_name;
-    private String description;
+    private String id;
+    private String name;
+    private String photo_path;
     private String company_id;
 
-    public CompanyServices(String service_id, String service_name, String description, String company_id) {
-        this.service_id = service_id;
-        this.service_name = service_name;
-        this.description = description;
+    public CompanyServices() {
+    }
+
+    public CompanyServices(String id, String name, String photo_path, String company_id) {
+        this.id = id;
+        this.name = name;
+        this.photo_path = photo_path;
         this.company_id = company_id;
     }
 
-    public String getService_id() {
-        return service_id;
+    public String getId() {
+        return id;
     }
 
-    public void setService_id(String service_id) {
-        this.service_id = service_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getService_name() {
-        return service_name;
+    public String getName() {
+        return name;
     }
 
-    public void setService_name(String service_name) {
-        this.service_name = service_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getPhoto_path() {
+        return photo_path;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPhoto_path(String photo_path) {
+        this.photo_path = photo_path;
     }
 
     public String getCompany_id() {

@@ -1,14 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/service_layout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.meseret.niqugebere.companies.fragments.CompanyServiceFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/services_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <android.support.v7.widget.RecyclerView
+           android:id="@+id/services_recyclerview"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
+       </android.support.v7.widget.RecyclerView>
+       <android.support.v7.widget.RecyclerView
+           android:visibility="gone"
+           android:id="@+id/service_detail_recyclerview"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
 
-</FrameLayout>
+       </android.support.v7.widget.RecyclerView>
+   </LinearLayout>
+<ProgressBar
+    android:id="@+id/service_pr"
+    android:layout_centerInParent="true"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+</RelativeLayout>

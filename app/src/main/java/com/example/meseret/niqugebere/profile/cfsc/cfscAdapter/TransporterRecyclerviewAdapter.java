@@ -102,7 +102,7 @@ public class TransporterRecyclerviewAdapter extends RecyclerView.Adapter<Transpo
         //Glide.with(mContext).load(ProjectStatic.IMAPGE_PATH+model.getPhoto_path()).into(holder.mall_phtoto);
         String car_plate_no="<font COLOR=\'#242424\'><b>" + "Plate Number:  " + "</b></font>"
                 + "<font COLOR=\'#05B070\'>" +model.getPlate_no()+ "</font>";
-        String car_capacity="<font COLOR=\'#242424\'><b>" + "Vehicle capacity:  " + "</b></font>"
+        String car_capacity="<font COLOR=\'#242424\'><b>" + "given price:  " + "</b></font>"
                 + "<font COLOR=\'#05B070\'>" +model.getCapacity() + "</font>";
         holder.plate_no.setText(Html.fromHtml(car_plate_no));
         holder.capacity.setText(Html.fromHtml(car_capacity));
@@ -110,7 +110,7 @@ public class TransporterRecyclerviewAdapter extends RecyclerView.Adapter<Transpo
         holder.award.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((DemandAwardingActivity)holder.award.getContext()).awarding_info.setText("Congratulations you have done our demand requirements");
+                ((DemandAwardingActivity)holder.award.getContext()).awarding_info.setText("Congratulations you have done your demand requirements");
                 clearApplications();
             }
         });

@@ -49,6 +49,15 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:visibility="gone"
+        android:background="@color/navback"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_below="@id/profile_uploads_cover_layout"
         android:id="@+id/placeholder"

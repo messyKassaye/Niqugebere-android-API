@@ -8,6 +8,7 @@ import com.example.meseret.niqugebere.profile.cfsc.cfscModel.CFSCProductSubCateg
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.CfscProfileModel;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.Demands;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.InventoryPayment;
+import com.example.meseret.niqugebere.profile.cfsc.cfscModel.Notifications;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.Products;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.RequestedProduct;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.Supplies;
@@ -109,8 +110,16 @@ public interface CFSCClient {
     @GET("demand_apply")
     Call<ResponseToken> applyForDemand(@Query("token")String token,@Query("id")String id);
 
-    @GET("notification")
+    @GET("notification/count")
     Call<ResponseToken> getNotifications(@Query("token")String token);
+
+    @GET("notification/update")
+    Call<ResponseToken> notificationUpdate(@Query("token")String token);
+
+    @GET("notification/index")
+    Call<List<Notifications>> notificationIndex(@Query("token")String token);
+    @GET("notification/show")
+    Call<List<Demands>> notificationShow(@Query("token")String token,@Query("id")int id,@Query("category_id")int cate_id);
 
     @GET("demand_notification")
     Call<List<Demands>> getDemandNotification(@Query("token")String token);
@@ -128,7 +137,7 @@ public interface CFSCClient {
     Call<ResponseToken> awardDemand(@Query("token")String token,@Query("id")String id);
 
     @GET("transporters")
-    Call<List<Transporter>> getTransporters(@Query("token")String token);
+    Call<List<Transporter>> getTransporters(@Query("token")String token,@Query("id")String id);
 
     @GET("award_transportation")
     Call<ResponseToken> awardTransportation(@Query("token")String token,@Query("id")String id);

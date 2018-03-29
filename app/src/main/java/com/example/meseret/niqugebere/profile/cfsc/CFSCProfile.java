@@ -23,6 +23,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,6 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.meseret.niqugebere.MainActivity;
 import com.example.meseret.niqugebere.R;
 import com.example.meseret.niqugebere.companies.companyAdapter.CustomSpinnerAdapter;
 import com.example.meseret.niqugebere.helpers.CircleTransform;
@@ -52,10 +54,12 @@ import com.example.meseret.niqugebere.profile.cfsc.cfscClient.CFSCClient;
 import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.Fragment_cfsc_profile_home;
 import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.NotificationFragment;
 import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.PostInventoryFragment;
+import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.PostProductFragment;
 import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.PostSupplyFragment;
 import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.PostdDemandFragment;
 import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.ShowDemandFragment;
 import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.ShowMyInventoryFragment;
+import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.ShowPostedProductFragment;
 import com.example.meseret.niqugebere.profile.cfsc.cfscFragments.ShowSupply;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.CfscProfileModel;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.Supplies;
@@ -203,7 +207,7 @@ public class CFSCProfile extends AppCompatActivity
         });
         showHome();
          //Toast.makeText(getApplicationContext(),getNotifications(),Toast.LENGTH_LONG).show();
-        getNotifications();
+       getNotifications();
 
     }
 
@@ -309,15 +313,23 @@ public class CFSCProfile extends AppCompatActivity
             badge = new CountDrawable(context);
         }
 
-        badge.setCount(count);
-        icon.mutate();
-        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+        if (count.equals("")){
+            badge.setAlpha(0);
+            reuse.setVisible(false,true);
+        }else {
+            badge.setCount(count);
+            icon.mutate();
+            icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+        }
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.cfscprofile, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cfscprofile, menu);
+        //getMenuInflater().inflate(R.menu.cfscprofile, menu);
         return true;
     }
 
@@ -340,6 +352,15 @@ public class CFSCProfile extends AppCompatActivity
             ft.replace(R.id.placeholder, fragment);
             ft.addToBackStack(null);
             ft.commit();
+            setNotificationSeen(getToken());
+
+        }else if(id==R.id.action_logout){
+            editor.clear();
+            editor.commit();
+            Intent intent=new Intent(CFSCProfile.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -364,6 +385,26 @@ public class CFSCProfile extends AppCompatActivity
         });
 
        // return  response_message;
+    }
+
+    public void setNotificationSeen(String token){
+        setCount(getApplicationContext(),"");
+
+       /* Retrofit retrofit=getUserAPIretrofit();
+        CFSCClient client=retrofit.create(CFSCClient.class);
+        Call<ResponseToken> call=client.notificationUpdate(token);
+        call.enqueue(new Callback<ResponseToken>() {
+            @Override
+            public void onResponse(Call<ResponseToken> call, Response<ResponseToken> response) {
+                if(response.isSuccessful()){
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseToken> call, Throwable throwable) {
+
+            }
+        });*/
     }
 
     public void showHome(){
@@ -428,6 +469,22 @@ public class CFSCProfile extends AppCompatActivity
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             fragment = new ShowMyInventoryFragment();
+            ft.replace(R.id.placeholder, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+        }else if(id==R.id.cfsc_post_product){
+            getSupportActionBar().setTitle("Post product");
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            fragment = new PostProductFragment();
+            ft.replace(R.id.placeholder, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+        }else if(id==R.id.cfsc_show_product){
+            getSupportActionBar().setTitle("List of Posted product");
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            fragment = new ShowPostedProductFragment();
             ft.replace(R.id.placeholder, fragment);
             ft.addToBackStack(null);
             ft.commit();

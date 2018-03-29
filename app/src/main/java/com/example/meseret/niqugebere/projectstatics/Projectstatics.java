@@ -6,10 +6,11 @@ package com.example.meseret.niqugebere.projectstatics;
 
 public class Projectstatics {
     //http://niqugebere.malladdis.com/api
-    public static final String AUTH_URL="http://niqugebere.malladdis.comapi/auth/";
+    public static final String AUTH_URL="http://niqugebere.malladdis.com/api/auth/";
     public static final String URL="http://niqugebere.malladdis.com/api/";
     public static final String IMAPGE_PATH="http://niqugebere.malladdis.com/";
 
     public Projectstatics() {
+
     }
 }

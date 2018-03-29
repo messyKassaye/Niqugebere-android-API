@@ -8,14 +8,23 @@ public class ProductAdapterModel {
     private String id;
     private String name;
     private String photo;
-    private String product_id;
+    private String category_name;
+    private String price;
 
-    public String getProduct_id() {
-        return product_id;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getId() {

@@ -29,6 +29,19 @@
         </menu>
     </item>
 
+    <item android:title="Manage Product">
+        <menu>
+            <item
+                android:id="@+id/cfsc_post_product"
+                android:icon="@drawable/post_demand"
+                android:title="Post product" />
+            <item
+                android:id="@+id/cfsc_show_product"
+                android:icon="@drawable/show_demand"
+                android:title="Show posted product" />
+        </menu>
+    </item>
+
     <!-- setting menu -->
     <item android:title="My Inventory">
         <menu>

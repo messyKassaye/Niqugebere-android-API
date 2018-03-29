@@ -63,24 +63,26 @@ public class ProfileSupplyFragement extends Fragment {
         call.enqueue(new Callback<List<Supplies>>() {
             @Override
             public void onResponse(Call<List<Supplies>> call, Response<List<Supplies>> response) {
-                if (response.body().size()>0){
-                    for (int i=0;i<response.body().size();i++){
-                        SuppliesAdapterModel model=new SuppliesAdapterModel();
-                        model.setProduct_photo(response.body().get(i).getProduct_photo());
-                        model.setCompany_photo(response.body().get(i).getCompany_photo());
-                        model.setCompany_name(response.body().get(i).getCompany_name());
-                        model.setCategory_name(response.body().get(i).getCategory_name());
-                        model.setSub_category_name(response.body().get(i).getSub_category_name());
-                        model.setTitle(response.body().get(i).getTitle());
-                        model.setPrice(response.body().get(i).getPrice());
-                        model.setAvailability(response.body().get(i).getAvailability());
-                        model.setId(response.body().get(i).getId());
-                        model.setToken(getToken());
-                        supply_list.add(model);
+                if(response.isSuccessful()){
+                    if (response.body().size()>0){
+                        for (int i=0;i<response.body().size();i++){
+                            SuppliesAdapterModel model=new SuppliesAdapterModel();
+                            model.setProduct_photo(response.body().get(i).getProduct_photo());
+                            model.setCompany_photo(response.body().get(i).getCompany_photo());
+                            model.setCompany_name(response.body().get(i).getCompany_name());
+                            model.setCategory_name(response.body().get(i).getCategory_name());
+                            model.setSub_category_name(response.body().get(i).getSub_category_name());
+                            model.setTitle(response.body().get(i).getTitle());
+                            model.setPrice(response.body().get(i).getPrice());
+                            model.setAvailability(response.body().get(i).getAvailability());
+                            model.setId(response.body().get(i).getId());
+                            model.setToken(getToken());
+                            supply_list.add(model);
+                        }
                     }
+                    supply_adapter.notifyDataSetChanged();
+                    supply_recyclerview.setAdapter(supply_adapter);
                 }
-                supply_adapter.notifyDataSetChanged();
-                supply_recyclerview.setAdapter(supply_adapter);
             }
 
             @Override

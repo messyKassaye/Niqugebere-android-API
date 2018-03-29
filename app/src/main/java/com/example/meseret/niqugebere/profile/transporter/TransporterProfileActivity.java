@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.meseret.niqugebere.MainActivity;
 import com.example.meseret.niqugebere.R;
 import com.example.meseret.niqugebere.helpers.CircleTransform;
 import com.example.meseret.niqugebere.profile.cfsc.CFSCProfile;
@@ -190,6 +191,12 @@ public class TransporterProfileActivity extends AppCompatActivity
         if (id == R.id.action_home) {
             showHome();
             return true;
+        }else if(id==R.id.action_logout){
+            editor.clear();
+            editor.commit();
+            Intent intent=new Intent(TransporterProfileActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

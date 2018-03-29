@@ -7,12 +7,17 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,8 +35,17 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.meseret.niqugebere.R;
+import com.example.meseret.niqugebere.clients.MainClient;
 import com.example.meseret.niqugebere.companies.companyAdapter.CustomSpinnerAdapter;
+import com.example.meseret.niqugebere.model.MarketLists;
+import com.example.meseret.niqugebere.model.Markets;
+import com.example.meseret.niqugebere.model.ProductCategory;
+import com.example.meseret.niqugebere.model.ProductSubCategory;
 import com.example.meseret.niqugebere.model.ResponseToken;
+import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.PostInventoryProductCatoryRecyclerviewAdapter;
+import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.PostInventorySubProductCategoryRecyclerviewAdapter;
+import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.SupplyProductrecyclerviewAdapter;
+import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.SupplySubProductRecylerviewAdapter;
 import com.example.meseret.niqugebere.profile.cfsc.cfscClient.CFSCClient;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.CFSCInvetory;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.CFSCProductCategory;
@@ -55,8 +70,6 @@ public class PostInventoryFragment extends Fragment {
     private ArrayList<String> category_list,sub_category_list,availability_list;
     private ArrayList<Integer> category_id_holder,sub_category_id_holder;
     private int category_id,sub_category_id;
-    private CustomSpinnerAdapter registration_type_adapter,sub_category_adapter;
-    private Spinner post_product_category,post_product_sub_category_spinner;
     private Resources res;
     private SharedPreferences preferences;
     private String token;
@@ -69,6 +82,22 @@ public class PostInventoryFragment extends Fragment {
     private ViewFlipper flipper;
     private View first_view,success_view;
     private TextView succes_message,erro_shower;
+
+
+    private String productName;
+    private RecyclerView product_cateogry_recyclerview;
+    private List<ProductCategory> product_category_list;
+    private PostInventoryProductCatoryRecyclerviewAdapter product_recyclerview_adapter;
+    private TextView product_type_textview;
+
+
+    private String productSubName;
+    private TextView product_sub_category_textview;
+    private List<ProductSubCategory> productSubCategoryList;
+    private PostInventorySubProductCategoryRecyclerviewAdapter product_subcategory_adapter;
+    private RecyclerView product_subcategory_recyclerview;
+
+    private LinearLayout hiddenLayout;
 
     public PostInventoryFragment() {
         // Required empty public constructor
@@ -84,102 +113,59 @@ public class PostInventoryFragment extends Fragment {
         setToken(preferences.getString("token",null));
 
         flipper=(ViewFlipper)view.findViewById(R.id.inventory_flipper);
+        pr=(ProgressBar)view.findViewById(R.id.inventory_pr);
         first_view=LayoutInflater.from(getActivity()).inflate(R.layout.post_inventory_first_view,null);
         success_view=LayoutInflater.from(getActivity()).inflate(R.layout.post_supply_success_view,null);
 
         succes_message=(TextView)success_view.findViewById(R.id.post_supply_success_message);
 
         erro_shower=(TextView)first_view.findViewById(R.id.inventory_error);
-        post_product_category=(Spinner)first_view.findViewById(R.id.post_product_category);
-        category_list=new ArrayList<>();
-        category_list.add(getResources().getString(R.string.selet_post_product_category));
-        registration_type_adapter=new CustomSpinnerAdapter(getActivity(), R.layout.spinner_dropdown, category_list, res);
-        post_product_category.setAdapter(registration_type_adapter);
-        category_id_holder=new ArrayList<>();
+        hiddenLayout=(LinearLayout)first_view.findViewById(R.id.invetoryHiddenLayout);
 
-        Retrofit retrofit=getUserAPIretrofit();
-        CFSCClient client=retrofit.create(CFSCClient.class);
-        Call<List<CFSCProductCategory>> call=client.getProductCategory(getToken());
-        call.enqueue(new Callback<List<CFSCProductCategory>>() {
+
+
+        product_category_list = new ArrayList<>();
+        product_recyclerview_adapter = new PostInventoryProductCatoryRecyclerviewAdapter(getActivity(), product_category_list,this);
+        product_type_textview=(TextView)first_view.findViewById(R.id.produc_type_textview);
+        product_cateogry_recyclerview = (RecyclerView) first_view.findViewById(R.id.post_product_category);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        product_cateogry_recyclerview.setLayoutManager(mLayoutManager);
+        product_cateogry_recyclerview.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        product_cateogry_recyclerview.setItemAnimator(new DefaultItemAnimator());
+
+        pr.setVisibility(View.VISIBLE);
+        Retrofit retrofit = getUserAPIretrofit();
+        MainClient client = retrofit.create(MainClient.class);
+        Call<List<Markets>> call = client.getMarkets();
+        call.enqueue(new Callback<List<Markets>>() {
             @Override
-            public void onResponse(Call<List<CFSCProductCategory>> call, Response<List<CFSCProductCategory>> response) {
-                for (int i=0;i<response.body().size();i++){
-                    category_list.add(response.body().get(i).getName());
-                    category_id_holder.add(response.body().get(i).getId());
+            public void onResponse(Call<List<Markets>> call, Response<List<Markets>> response) {
+                if (response.isSuccessful()) {
+                    pr.setVisibility(View.GONE);
+                    for (int i = 0; i < response.body().size(); i++) {
+                        ProductCategory model = new ProductCategory();
+                        model.setId(response.body().get(i).getId());
+                        model.setName(response.body().get(i).getName());
+                        product_category_list.add(model);
+                    }
+                    product_recyclerview_adapter.notifyDataSetChanged();
+                    product_cateogry_recyclerview.setAdapter(product_recyclerview_adapter);
+
                 }
 
             }
 
             @Override
-            public void onFailure(Call<List<CFSCProductCategory>> call, Throwable t) {
+            public void onFailure(Call<List<Markets>> call, Throwable t) {
 
             }
         });
 
 
-        post_product_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i>=1){
-                    setCategory_id(category_id_holder.get(i-1));
-                    Retrofit retrofit1=getUserAPIretrofit();
-                    CFSCClient client1= retrofit1.create(CFSCClient.class);
-                    Call<List<CFSCProductSubCategory>>call1=client1.getSubProductCategory(getToken(),category_id_holder.get(i-1));
-                    call1.enqueue(new Callback<List<CFSCProductSubCategory>>() {
-                        @Override
-                        public void onResponse(Call<List<CFSCProductSubCategory>> call, Response<List<CFSCProductSubCategory>> response) {
-                            if (response.body().size()>0){
-                                //sub_category_id_holder.rem;
-                                sub_category_list.clear();
-                                sub_category_id_holder.clear();
-                                sub_category_list.add(getResources().getString(R.string.selet_post_product_category));
-                                for (int i=0;i<response.body().size();i++){
-                                    sub_category_list.add(response.body().get(i).getName());
-                                    sub_category_id_holder.add(response.body().get(i).getId());
-                                }
-                            }else {
-                                sub_category_list.add(getResources().getString(R.string.selet_post_product_category));
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<CFSCProductSubCategory>> call, Throwable t) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        post_product_sub_category_spinner=(Spinner)first_view.findViewById(R.id.post_supply_sub_category);
-        sub_category_list=new ArrayList<>();
-        sub_category_list.add(getResources().getString(R.string.selet_post_product_category));
-        sub_category_adapter=new CustomSpinnerAdapter(getActivity(), R.layout.spinner_dropdown, sub_category_list, res);
-        post_product_sub_category_spinner.setAdapter(sub_category_adapter);
-        sub_category_id_holder=new ArrayList<>();
-        post_product_sub_category_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i>=1){
-                    setSub_category_id(sub_category_id_holder.get(i-1));
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         product_name_edt=(EditText)first_view.findViewById(R.id.supply_post_product_name);
         product_price_edt=(EditText)first_view.findViewById(R.id.supply_post_product_price);
 
-        pr=(ProgressBar)first_view.findViewById(R.id.post_supply_pr);
 
         post_supply_btn=(Button)first_view.findViewById(R.id.post_supply_btn);
         post_supply_btn.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +174,7 @@ public class PostInventoryFragment extends Fragment {
             public void onClick(View view) {
                 String product_name_value=product_name_edt.getText().toString();
                 String product_quantity_value=product_price_edt.getText().toString();
-                if(getCategory_id()==0){
+                if(getSub_category_id()==0){
                     erro_shower.setText("Please select product category");
                     erro_shower.setVisibility(View.VISIBLE);
                 }else if(getSub_category_id()==0){
@@ -204,7 +190,7 @@ public class PostInventoryFragment extends Fragment {
                     erro_shower.setVisibility(View.VISIBLE);
 
                 }else {
-                    postInventory(String.valueOf(getCategory_id()),String.valueOf(getSub_category_id()),product_name_value,product_quantity_value);
+                    postInventory(String.valueOf(getSub_category_id()),String.valueOf(getSub_category_id()),product_name_value,product_quantity_value);
 
                 }
 
@@ -226,6 +212,63 @@ public class PostInventoryFragment extends Fragment {
         flipper.addView(first_view);
         flipper.showNext();
         return view;
+    }
+
+    public void displayProductSubCategory(String id,String product_name){
+        pr.setVisibility(View.VISIBLE);
+        setProductName(product_name);
+        productSubCategoryList=new ArrayList<>();
+        product_subcategory_adapter=new PostInventorySubProductCategoryRecyclerviewAdapter(getActivity(),productSubCategoryList,this);
+        product_subcategory_recyclerview=(RecyclerView)first_view.findViewById(R.id.product_sub_category_recyclerview);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        product_subcategory_recyclerview.setLayoutManager(mLayoutManager);
+        product_subcategory_recyclerview.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        product_subcategory_recyclerview.setItemAnimator(new DefaultItemAnimator());
+
+        Retrofit retrofit = getUserAPIretrofit();
+        MainClient client = retrofit.create(MainClient.class);
+        Call<List<MarketLists>> call=client.getMarketCategory(id);
+        call.enqueue(new Callback<List<MarketLists>>() {
+            @Override
+            public void onResponse(Call<List<MarketLists>> call, Response<List<MarketLists>> response) {
+                if(response.isSuccessful()){
+                    pr.setVisibility(View.GONE);
+                    product_type_textview.setTextColor(getResources().getColor(R.color.bg));
+                    product_type_textview.setText("You have Selected a product type of "+getProductName()+"");
+                    product_cateogry_recyclerview.setVisibility(View.GONE);
+
+                    product_sub_category_textview=(TextView)first_view.findViewById(R.id.product_sub_category_textview);
+                    product_sub_category_textview.setVisibility(View.VISIBLE);
+                    product_sub_category_textview.setText("Select what type of "+getProductName()+" you need to send as inventory");
+
+                    for (int i=0;i<response.body().size();i++){
+                        ProductSubCategory model=new ProductSubCategory();
+                        model.setId(response.body().get(i).getId());
+                        model.setName(response.body().get(i).getName());
+                        productSubCategoryList.add(model);
+                    }
+                    product_subcategory_adapter.notifyDataSetChanged();
+                    product_subcategory_recyclerview.setAdapter(product_subcategory_adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MarketLists>> call, Throwable throwable) {
+
+            }
+        });
+
+
+    }
+    public void displayWoredas(String id,String product_sub_name) {
+        pr.setVisibility(View.GONE);
+        setProductSubName(product_sub_name);
+        setSub_category_id(Integer.parseInt(id));
+        product_sub_category_textview.setTextColor(getResources().getColor(R.color.bg));
+        product_sub_category_textview.setText("You have selected "+getProductSubName()+" a type of "+getProductName());
+        product_subcategory_recyclerview.setVisibility(View.GONE);
+        hiddenLayout.setVisibility(View.VISIBLE);
+
     }
 
     public int getCategory_id() {
@@ -287,4 +330,62 @@ public void postInventory(String category_id,String sub_category_id,String produ
         this.sub_category_id = sub_category_id;
     }
 
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
+                }
+            }
+        }
+    }
+
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    public String getProductSubName() {
+        return productSubName;
+    }
+
+    public void setProductSubName(String productSubName) {
+        this.productSubName = productSubName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 }

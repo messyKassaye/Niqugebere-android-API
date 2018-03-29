@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class ShowMyInventoryFragment extends Fragment {
     private String token;
     private TextView company_name,total_payment;
     private ImageView company_photo;
+    private ProgressBar pr;
     public ShowMyInventoryFragment() {
         // Required empty public constructor
     }
@@ -56,7 +58,8 @@ public class ShowMyInventoryFragment extends Fragment {
         company_name=(TextView)view.findViewById(R.id.payed_company_name);
         company_photo=(ImageView)view.findViewById(R.id.payed_company_photo);
         total_payment=(TextView)view.findViewById(R.id.total_payment);
-
+        pr=(ProgressBar)view.findViewById(R.id.show_inventory_pr);
+        pr.setVisibility(View.VISIBLE);
         Retrofit retrofit=getUserAPIretrofit();
         CFSCClient client=retrofit.create(CFSCClient.class);
         Call<List<InventoryPayment>>call=client.getMyInventory(getToken());
@@ -64,6 +67,7 @@ public class ShowMyInventoryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<InventoryPayment>> call, Response<List<InventoryPayment>> response) {
                if (response.isSuccessful()){
+                   pr.setVisibility(View.GONE);
                    if (response.body().size()>0){
                        Glide.with(getActivity())
                                .load(Uri.parse(Projectstatics.IMAPGE_PATH+response.body().get(0).getPhoto_path())) // add your image url

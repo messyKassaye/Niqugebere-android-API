@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+ <TextView
+     android:id="@+id/service_title"
+     android:gravity="center"
+     android:layout_marginBottom="5dp"
+     android:textColor="@color/navback"
+     android:textSize="18sp"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content" />
+    <WebView
+        android:id="@+id/service_description_webview"
+        android:background="@color/navtextcolor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </WebView>
+</LinearLayout>

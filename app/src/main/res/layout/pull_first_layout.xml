@@ -12,7 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:text="@string/pull_info_values"
+            android:textColor="@color/navback"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
             android:id="@+id/produc_type_textview"
+            android:textSize="18sp"
             android:text="@string/select_product_type_you_need_to_buy"
             android:textColor="@color/navtextcolor"
             android:layout_width="match_parent"
@@ -26,6 +34,7 @@
 
         <TextView
             android:id="@+id/product_sub_category_textview"
+            android:textSize="18sp"
             android:visibility="gone"
             android:layout_marginTop="20dp"
             android:textColor="@color/navtextcolor"
@@ -41,11 +50,35 @@
         <TextView
             android:id="@+id/current_location_textview"
             android:text="@string/tell_us_where_you_live"
+            android:textSize="18sp"
             android:visibility="gone"
             android:layout_marginTop="20dp"
             android:textColor="@color/navtextcolor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <!-- login editext layout-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+            android:theme="@style/MyTextInputLayout"
+            android:textColorHint="@color/hint_color"
+            android:paddingTop="5dp"
+            android:id="@+id/input_layout_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/search_woreda"
+                android:visibility="gone"
+                android:hint="@string/search_woreda_hine"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:background="@drawable/text_field"
+                android:textColor="@color/navtextcolor"
+                android:textColorHint="@color/hint_color"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp" />
+
+        </android.support.design.widget.TextInputLayout>
          <android.support.v7.widget.RecyclerView
              android:id="@+id/current_location_recyclerview"
              android:layout_width="match_parent"

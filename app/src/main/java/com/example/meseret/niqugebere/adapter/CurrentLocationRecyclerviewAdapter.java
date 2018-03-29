@@ -1,20 +1,29 @@
 package com.example.meseret.niqugebere.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.TextView;
 
 import com.example.meseret.niqugebere.R;
+import com.example.meseret.niqugebere.companies.companyClients.CompanyClient;
 import com.example.meseret.niqugebere.companies.companyModels.Woreda;
 import com.example.meseret.niqugebere.fragments.PullFragment;
 import com.example.meseret.niqugebere.model.ProductSubCategory;
 import com.example.meseret.niqugebere.projectstatics.Projectstatics;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -28,6 +37,7 @@ private Context mContext;
 private List<Woreda> albumList;
 private boolean is_runnig=true;
 private PullFragment fragment;
+    private CustomFilter filter;
 public class MyViewHolder extends RecyclerView.ViewHolder {
     public Button product_name;
 
@@ -35,14 +45,27 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     public MyViewHolder(View view) {
         super(view);
         product_name = (Button)view.findViewById(R.id.product_select_btn);
+
     }
 }
+
 
 
     public CurrentLocationRecyclerviewAdapter(Context mContext, List<Woreda> albumList, PullFragment fragments) {
         this.mContext = mContext;
         this.albumList = albumList;
         this.fragment=fragments;
+        filter=new CustomFilter(this);
+    }
+    public void clearApplications() {
+        int size = this.albumList.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                albumList.remove(0);
+            }
+
+            this.notifyItemRangeRemoved(0, size);
+        }
     }
 
     @Override
@@ -71,6 +94,11 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
     }
 
+
+    public Filter getfFilter(){
+        return filter;
+    }
+
     public Retrofit getUserAPIretrofit(){
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(Projectstatics.URL)
@@ -79,7 +107,68 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         return retrofit;
     }
 
+ class  CustomFilter extends Filter{
+    private CurrentLocationRecyclerviewAdapter adapter;
+    private List<Woreda> backupData;
+     public CustomFilter(CurrentLocationRecyclerviewAdapter adapter) {
+         super();
+         this.adapter = adapter;
+         backupData=new ArrayList<>();
+     }
 
+     public List<Woreda> getBackupData() {
+         fragment.displayProgressBar(true);
+         Retrofit retrofit=getUserAPIretrofit();
+         CompanyClient client=retrofit.create(CompanyClient.class);
+         Call<List<Woreda>> call=client.getWoreda();
+         call.enqueue(new Callback<List<Woreda>>() {
+             @Override
+             public void onResponse(Call<List<Woreda>> call, Response<List<Woreda>> response) {
+                 if(response.isSuccessful()){
+                     fragment.displayProgressBar(false);
+                    for (int i=0;i<response.body().size();i++){
+                         Woreda model=new Woreda();
+                         model.setId(response.body().get(i).getId());
+                         model.setName(response.body().get(i).getName());
+                         backupData.add(model);
+                     }
+                 }
+             }
+
+             @Override
+             public void onFailure(Call<List<Woreda>> call, Throwable throwable) {
+
+             }
+         });
+         return backupData;
+     }
+
+
+     @Override
+     protected FilterResults performFiltering(CharSequence constraint) {
+         albumList.clear();
+         final FilterResults results = new FilterResults();
+         if (constraint.length() == 0) {
+             albumList.addAll(getBackupData());
+         } else {
+             final String filterPattern = constraint.toString().toLowerCase().trim();
+             for (final Woreda mWords : getBackupData()) {
+                 if (mWords.getName().toLowerCase().startsWith(filterPattern)) {
+                     albumList.add(mWords);
+                 }
+             }
+         }
+         results.values=albumList;
+         results.count=albumList.size();
+         return results;
+     }
+
+     @Override
+     protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            this.adapter.notifyDataSetChanged();
+         Log.d("size update:",String.valueOf(getBackupData().size()));
+     }
+ }
     /**
      * Click listener for popup menu items
      */

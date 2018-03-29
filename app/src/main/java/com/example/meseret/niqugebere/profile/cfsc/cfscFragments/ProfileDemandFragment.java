@@ -62,24 +62,26 @@ public class ProfileDemandFragment extends Fragment {
         call.enqueue(new Callback<List<Demands>>() {
             @Override
             public void onResponse(Call<List<Demands>> call, Response<List<Demands>> response) {
-                if (response.body().size()>0){
-                    for (int i=0;i<response.body().size();i++){
-                        DemandsAdapterModel model=new DemandsAdapterModel();
-                        model.setProduct_photo(response.body().get(i).getProduct_photo());
-                        model.setCompany_photo(response.body().get(i).getCompany_photo());
-                        model.setCompany_name(response.body().get(i).getCompany_name());
-                        model.setCategory_name(response.body().get(i).getCategory_name());
-                        model.setSub_category_name(response.body().get(i).getSub_category_name());
-                        model.setTitle(response.body().get(i).getTitle());
-                        model.setPrice(response.body().get(i).getPrice());
-                        model.setAvailability(response.body().get(i).getAvailability());
-                        model.setId(response.body().get(i).getId());
-                        model.setToken(getToken());
-                        demand_list.add(model);
+                if(response.isSuccessful()){
+                    if (response.body().size()>0){
+                        for (int i=0;i<response.body().size();i++){
+                            DemandsAdapterModel model=new DemandsAdapterModel();
+                            model.setProduct_photo(response.body().get(i).getProduct_photo());
+                            model.setCompany_photo(response.body().get(i).getCompany_photo());
+                            model.setCompany_name(response.body().get(i).getCompany_name());
+                            model.setCategory_name(response.body().get(i).getCategory_name());
+                            model.setSub_category_name(response.body().get(i).getSub_category_name());
+                            model.setTitle(response.body().get(i).getTitle());
+                            model.setPrice(response.body().get(i).getPrice());
+                            model.setAvailability(response.body().get(i).getAvailability());
+                            model.setId(response.body().get(i).getId());
+                            model.setToken(getToken());
+                            demand_list.add(model);
+                        }
                     }
+                    demand_adapter.notifyDataSetChanged();
+                    demand_recyclerview.setAdapter(demand_adapter);
                 }
-                demand_adapter.notifyDataSetChanged();
-                demand_recyclerview.setAdapter(demand_adapter);
             }
 
             @Override

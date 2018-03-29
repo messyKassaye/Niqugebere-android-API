@@ -17,6 +17,9 @@ public class Demands {
     private String availability;
     private String description;
 
+    public Demands() {
+    }
+
     public Demands(String id, String company_name, String company_photo, String category_name, String sub_category_name, String title, String product_photo, String price, String total_quantity, String availability, String description) {
         this.id = id;
         this.company_name = company_name;

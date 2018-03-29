@@ -12,6 +12,7 @@ import com.example.meseret.niqugebere.model.ResponseToken;
 import com.example.meseret.niqugebere.model.Roles;
 import com.example.meseret.niqugebere.model.Services;
 import com.example.meseret.niqugebere.model.Sponsors;
+import com.example.meseret.niqugebere.model.Version;
 
 import java.util.List;
 
@@ -57,4 +58,7 @@ public interface MainClient {
 
     @GET("pull")
     Call<List<PullAdapterModel>> getPull(@Query("woreda_id")Integer woreda_id,@Query("sub_id")Integer sub_id);
+
+    @GET("version")
+    Call<Version> getVersions();
 }

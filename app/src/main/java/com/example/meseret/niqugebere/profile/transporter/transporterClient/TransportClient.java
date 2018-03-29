@@ -4,6 +4,7 @@ import com.example.meseret.niqugebere.model.ResponseToken;
 import com.example.meseret.niqugebere.profile.transporter.transporterModel.Paths;
 import com.example.meseret.niqugebere.profile.transporter.transporterModel.Transport;
 import com.example.meseret.niqugebere.profile.transporter.transporterModel.TransportFrom;
+import com.example.meseret.niqugebere.profile.transporter.transporterModel.TransportationBid;
 import com.example.meseret.niqugebere.profile.transporter.transporterModel.Vehicles;
 
 import java.util.List;
@@ -30,4 +31,7 @@ public interface TransportClient {
 
     @GET("transport_from")
     Call<List<TransportFrom>> getTransportationsFrom(@Query("token")String token, @Query("id")int id);
+
+    @POST("transportationBid/create")
+    Call<ResponseToken> transportationBid(@Query("token")String token,@Body TransportationBid bid);
 }

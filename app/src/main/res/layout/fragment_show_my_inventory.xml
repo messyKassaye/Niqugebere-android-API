@@ -1,32 +1,46 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.meseret.niqugebere.profile.cfsc.cfscFragments.ShowMyInventoryFragment">
 
-    <ImageView
-        android:id="@+id/payed_company_photo"
-        android:layout_alignParentLeft="true"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        android:layout_width="96dp"
-        android:layout_height="96dp"/>
-    <TextView
-        android:id="@+id/payed_company_name"
-        android:layout_margin="10dp"
-        android:textColor="@color/navtextcolor"
-        android:textSize="20sp"
-        android:gravity="center"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/payed_company_photo"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"/>
+        <TextView
+            android:id="@+id/payed_company_name"
+            android:layout_margin="10dp"
+            android:textColor="@color/navtextcolor"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/total_payment"
+            android:textSize="18sp"
+            android:textColor="@color/navtextcolor"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/show_inventory_pr"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/total_payment"
-        android:textSize="18sp"
-        android:textColor="@color/navtextcolor"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</RelativeLayout>

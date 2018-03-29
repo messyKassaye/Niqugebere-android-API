@@ -94,20 +94,6 @@ public class DemandAwardingActivity extends AppCompatActivity {
             public void onResponse(Call<List<Demands>> call, Response<List<Demands>> response) {
                 if(response.isSuccessful()){
                     pr.setVisibility(View.GONE);
-                    setProductName(response.body().get(0).getTitle() );
-                    Picasso.with(getApplicationContext()).load(Projectstatics.IMAPGE_PATH+response.body().get(0).getProduct_photo()).placeholder(R.drawable.background_tile2_small).into(supplied_product_photo);
-                    String product_name="<font COLOR=\'#242424\'><b>" + "Category name:  " + "</b></font>"
-                            + "<font COLOR=\'#05B070\'>" +response.body().get(0).getCategory_name() + "</font>";
-                    String product_sub_name="<font COLOR=\'#242424\'><b>" + "Category type:  " + "</b></font>"
-                            + "<font COLOR=\'#05B070\'>" +response.body().get(0).getSub_category_name() + "</font>";
-                    String supplied_product_names="<font COLOR=\'#242424\'><b>" + "Product name:  " + "</b></font>"
-                            + "<font COLOR=\'#05B070\'>" +response.body().get(0).getTitle() + "</font>";
-                    String supplied_product_price="<font COLOR=\'#242424\'><b>" + "Unit price:  " + "</b></font>"
-                            + "<font COLOR=\'#05B070\'>" +response.body().get(0).getPrice()+" ETB"+ "</font>";
-                    product_category_name.setText(Html.fromHtml(product_name));
-                    product_sub_category_name.setText(Html.fromHtml(product_sub_name));
-                    supplied_product_name.setText(Html.fromHtml(supplied_product_names));
-                    price.setText(Html.fromHtml(supplied_product_price));
                     awarding_info.setText("List of company applied for "+response.body().get(0).getTitle());
                 }
             }
@@ -166,7 +152,7 @@ public class DemandAwardingActivity extends AppCompatActivity {
         transporter_recyclerview.setVisibility(View.VISIBLE);
         Retrofit retrofit=getUserAPIretrofit();
         CFSCClient client=retrofit.create(CFSCClient.class);
-        Call<List<Transporter>> call=client.getTransporters(getToken());
+        Call<List<Transporter>> call=client.getTransporters(getToken(),getId());
         call.enqueue(new Callback<List<Transporter>>() {
             @Override
             public void onResponse(Call<List<Transporter>> call, Response<List<Transporter>> response) {

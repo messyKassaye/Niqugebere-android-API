@@ -9,6 +9,9 @@ public class Services {
     private String name;
     private String photo_path;
 
+    public Services() {
+    }
+
     public Services(String id, String name, String photo_path) {
         this.id = id;
         this.name = name;

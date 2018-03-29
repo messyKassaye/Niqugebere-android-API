@@ -10,6 +10,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -62,12 +65,10 @@ public class PullFragment extends Fragment {
     private ArrayList<String> category_list, sub_category_list, availability_list;
     private ArrayList<Integer> category_id_holder, sub_category_id_holder;
     private CustomSpinnerAdapter registration_type_adapter, sub_category_adapter, availability_adapter;
-    private Spinner  availability_spinner;
     private Resources res;
 
     private View first_view, second_view;
 
-    private Spinner woreda_spinner;
     private ArrayList<String> woreda_list;
     private CustomSpinnerAdapter adapter;
     private ArrayList<Integer> id_holder;
@@ -100,6 +101,8 @@ public class PullFragment extends Fragment {
     private List<Woreda> currentLocationList;
     private CurrentLocationRecyclerviewAdapter currentLocationAdapter;
     private RecyclerView currentLocationRecyclerview;
+    private EditText search_woreda_edt;
+    private String woredaName;
 
 
     public PullFragment() {
@@ -164,6 +167,24 @@ public class PullFragment extends Fragment {
         pull_recyclerView = (RecyclerView) second_view.findViewById(R.id.pull_recyclerview);
         pull_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         pull_recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        search_woreda_edt=(EditText)first_view.findViewById(R.id.search_woreda);
+        search_woreda_edt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                currentLocationAdapter.getfFilter().filter(charSequence.toString());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         pull = (Button) first_view.findViewById(R.id.pull_btn);
         pull.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,7 +204,7 @@ public class PullFragment extends Fragment {
                             if (response.isSuccessful()) {
                                 pr.setVisibility(View.GONE);
                                 if (response.body().size() <= 0) {
-                                    pull_info.setText("We can't find agricultural commercial farm centers who have " + woreda_spinner.getSelectedItem().toString());
+                                    pull_info.setText("We can't find " + getProductSubName()+" around "+getWoredaName()+" area");
                                     flipper.removeAllViews();
                                     flipper.addView(second_view);
                                     flipper.showNext();
@@ -331,13 +352,18 @@ public class PullFragment extends Fragment {
             }
         });
 
+    }
 
-
-
-
+    public void displayProgressBar(boolean result){
+        if(result){
+            pr.setVisibility(View.VISIBLE);
+        }else {
+            pr.setVisibility(View.GONE);
+        }
     }
 
     public void displayPullButton(String locationId,String locationName){
+        setWoredaName(locationName);
         current_location_textview.setTextColor(Color.GREEN);
         current_location_textview.setText("Your Current Location is "+locationName);
         setWoreda_id(Integer.parseInt(locationId));
@@ -352,6 +378,14 @@ public class PullFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
         return retrofit;
+    }
+
+    public String getWoredaName() {
+        return woredaName;
+    }
+
+    public void setWoredaName(String woredaName) {
+        this.woredaName = woredaName;
     }
 
     public int getSub_category_id() {

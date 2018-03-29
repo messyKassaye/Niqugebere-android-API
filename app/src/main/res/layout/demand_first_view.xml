@@ -19,22 +19,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Spinner
+            <TextView
+                android:id="@+id/produc_type_textview"
+                android:textSize="18sp"
+                android:text="@string/select_product_type_you_need_to_suply"
+                android:textColor="@color/bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/post_product_category"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/profile_custom_spinner_background"
-                android:dropDownWidth="wrap_content"
-                android:spinnerMode="dropdown" />
-            <Spinner
-                android:id="@+id/post_supply_sub_category"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/product_sub_category_textview"
+                android:textSize="18sp"
+                android:visibility="gone"
                 android:layout_marginTop="20dp"
+                android:textColor="@color/bg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/profile_custom_spinner_background"
-                android:dropDownWidth="wrap_content"
-                android:spinnerMode="dropdown" />
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/product_sub_category_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_marginTop="10dp"

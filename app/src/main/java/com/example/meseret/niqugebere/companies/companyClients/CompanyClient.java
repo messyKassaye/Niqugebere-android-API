@@ -8,9 +8,11 @@ import com.example.meseret.niqugebere.companies.companyModels.ContactUs;
 import com.example.meseret.niqugebere.companies.companyModels.Order;
 import com.example.meseret.niqugebere.companies.companyModels.PostedProducts;
 import com.example.meseret.niqugebere.companies.companyModels.Prodcuts;
+import com.example.meseret.niqugebere.companies.companyModels.ServiceDetail;
 import com.example.meseret.niqugebere.companies.companyModels.Transporter;
 import com.example.meseret.niqugebere.companies.companyModels.Woreda;
 import com.example.meseret.niqugebere.model.APISuccessResponse;
+import com.example.meseret.niqugebere.model.Services;
 
 import java.util.List;
 
@@ -54,5 +56,11 @@ public interface CompanyClient {
 
     @GET("get_NearBy_Transporter")
     Call<List<Transporter>> getNearByTransporter(@Query("woreda_id")String id);
+
+    @GET("service/index")
+    Call<List<CompanyServices>> getServices(@Query("id")String id);
+
+    @GET("service/show")
+    Call<List<ServiceDetail>> showServices(@Query("id")String id,@Query("company_id")String company_id);
 
 }

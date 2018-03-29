@@ -9,10 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.meseret.niqugebere.R;
-import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.DemandNotificationAdapter;
+import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.MyDemandRequestrecyclerviewAdpater;
+import com.example.meseret.niqugebere.profile.cfsc.cfscAdapter.NotificationRecyclerviewAdapter;
 import com.example.meseret.niqugebere.profile.cfsc.cfscAdapterModel.DemandsAdapterModel;
 import com.example.meseret.niqugebere.profile.cfsc.cfscClient.CFSCClient;
 import com.example.meseret.niqugebere.profile.cfsc.cfscModel.Demands;
@@ -33,10 +34,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MyDemandRequestFragment extends Fragment {
 
     private List<DemandsAdapterModel> list;
-    private DemandNotificationAdapter adapter;
+    private MyDemandRequestrecyclerviewAdpater adapter;
     private RecyclerView recyclerView;
     private SharedPreferences preferences;
     private String token;
+    private TextView demandNull;
     public MyDemandRequestFragment() {
         // Required empty public constructor
     }
@@ -49,8 +51,10 @@ public class MyDemandRequestFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_my_demand_request, container, false);
         preferences=getActivity().getSharedPreferences("token",0);
         setToken(preferences.getString("token",""));
+
+        demandNull=(TextView)view.findViewById(R.id.demand_null_info);
         list=new ArrayList<>();
-        adapter=new DemandNotificationAdapter(getActivity(),list);
+        adapter=new MyDemandRequestrecyclerviewAdpater(getActivity(),list);
         recyclerView=(RecyclerView)view.findViewById(R.id.notification_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         Retrofit retrofit=getUserAPIretrofit();
@@ -60,19 +64,23 @@ public class MyDemandRequestFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Demands>> call, Response<List<Demands>> response) {
                 if(response.isSuccessful()){
-                    for (int i=0;i<response.body().size();i++){
-                        DemandsAdapterModel model=new DemandsAdapterModel();
-                        model.setProduct_photo(response.body().get(i).getProduct_photo());
-                        model.setTitle(response.body().get(i).getTitle());
-                        model.setCategory_name(response.body().get(i).getCategory_name());
-                        model.setSub_category_name(response.body().get(i).getSub_category_name());
-                        model.setId(response.body().get(i).getId());
-                        model.setPrice(response.body().get(i).getPrice());
-                        model.setTotal_quantity(response.body().get(i).getTotal_quantity());
-                        list.add(model);
+                    if(response.body().size()>0){
+                        for (int i=0;i<response.body().size();i++){
+                            DemandsAdapterModel model=new DemandsAdapterModel();
+                            model.setProduct_photo(response.body().get(i).getProduct_photo());
+                            model.setTitle(response.body().get(i).getTitle());
+                            model.setCategory_name(response.body().get(i).getCategory_name());
+                            model.setSub_category_name(response.body().get(i).getSub_category_name());
+                            model.setId(response.body().get(i).getId());
+                            model.setPrice(response.body().get(i).getPrice());
+                            model.setTotal_quantity(response.body().get(i).getTotal_quantity());
+                            list.add(model);
+                        }
+                        adapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(adapter);
+                    }else {
+                        demandIsNull();
                     }
-                    adapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapter);
                 }
             }
 
@@ -89,6 +97,11 @@ public class MyDemandRequestFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
         return retrofit;
+    }
+
+    public void demandIsNull(){
+        demandNull.setVisibility(View.VISIBLE);
+        demandNull.setText("You haven't posted any demand requests yet");
     }
 
     public String getToken() {

@@ -4,14 +4,18 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.meseret.niqugebere.R;
 import com.example.meseret.niqugebere.model.ResponseToken;
@@ -21,6 +25,7 @@ import com.example.meseret.niqugebere.profile.transporter.transporterAdapterMode
 import com.example.meseret.niqugebere.profile.transporter.transporterClient.TransportClient;
 import com.example.meseret.niqugebere.profile.transporter.transporterModel.Transport;
 import com.example.meseret.niqugebere.profile.transporter.transporterModel.TransportFrom;
+import com.example.meseret.niqugebere.profile.transporter.transporterModel.TransportationBid;
 import com.example.meseret.niqugebere.projectstatics.Projectstatics;
 
 import java.util.List;
@@ -46,9 +51,10 @@ public class TransportRecyclerviewAdapter extends RecyclerView.Adapter<Transport
     private LinearLayout supply_mainlayout;
     private TextView supply_success_message;
     private SharedPreferences preferences;
+    private String demandAggrementId;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView from_company,from_woreda,to_company,to_woreda,product_name,product_sub_name,title,total;
-        public Button choose,inclued;
+        public Button apply;
         public MyViewHolder(View view) {
             super(view);
             from_company=(TextView) view.findViewById(R.id.from_company);
@@ -59,6 +65,7 @@ public class TransportRecyclerviewAdapter extends RecyclerView.Adapter<Transport
             product_sub_name=(TextView)view.findViewById(R.id.product_sub_name);
             title=(TextView)view.findViewById(R.id.title);
             total=(TextView)view.findViewById(R.id.total_quantity);
+            apply=(Button)view.findViewById(R.id.transport_apply);
 
 
         }
@@ -94,7 +101,16 @@ public class TransportRecyclerviewAdapter extends RecyclerView.Adapter<Transport
 
         preferences=mContext.getSharedPreferences("token",0);
         setToken(preferences.getString("token",""));
+        final Dialog dialog=new Dialog(mContext);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.transportations_bid_layouts);
+        final EditText supply_quantity=(EditText)dialog.findViewById(R.id.supply_quantity);
+        pr=(ProgressBar)dialog.findViewById(R.id.supply_pr);
+        supply_mainlayout=(LinearLayout)dialog.findViewById(R.id.supply_main_layout);
+        supply_success_message=(TextView)dialog.findViewById(R.id.supply_success_shower);
+        Button apply_send=(Button)dialog.findViewById(R.id.apply_btn);
 
+        holder.apply.setTag(model.getId());
         holder.to_woreda.setText("woreda; "+model.getTo_woreda());
         holder.to_company.setText("Company: "+model.getTo_company());
         holder.title.setText("Product name: "+model.getTitle());
@@ -103,7 +119,7 @@ public class TransportRecyclerviewAdapter extends RecyclerView.Adapter<Transport
          holder.total.setText("Total Quantity: "+model.getTotal_quantity());
         Retrofit retrofit=getUserAPIretrofit();
         TransportClient client=retrofit.create(TransportClient.class);
-        Call<List<TransportFrom>> call=client.getTransportationsFrom(getToken(),model.getId());
+        final Call<List<TransportFrom>> call=client.getTransportationsFrom(getToken(),model.getId());
         call.enqueue(new Callback<List<TransportFrom>>() {
             @Override
             public void onResponse(Call<List<TransportFrom>> call, Response<List<TransportFrom>> response) {
@@ -114,6 +130,41 @@ public class TransportRecyclerviewAdapter extends RecyclerView.Adapter<Transport
 
             @Override
             public void onFailure(Call<List<TransportFrom>> call, Throwable t) {
+
+            }
+        });
+        holder.apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id=view.getTag().toString();
+                setDemandAggrementId(id);
+                dialog.show();
+            }
+        });
+        apply_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String price=supply_quantity.getText().toString();
+                if(!price.equals("")) {
+                    TransportationBid bid=new TransportationBid(getDemandAggrementId(),price);
+                    Retrofit retrofit1 = getUserAPIretrofit();
+                    TransportClient client1 = retrofit1.create(TransportClient.class);
+                    Call<ResponseToken> call1=client1.transportationBid(getToken(),bid);
+                    call1.enqueue(new Callback<ResponseToken>() {
+                        @Override
+                        public void onResponse(Call<ResponseToken> call, Response<ResponseToken> response) {
+                            if(response.isSuccessful()){
+                                dialog.dismiss();
+                                Toast.makeText(mContext,"Successfully applied",Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseToken> call, Throwable throwable) {
+
+                        }
+                    });
+                }
 
             }
         });
@@ -178,5 +229,13 @@ public class TransportRecyclerviewAdapter extends RecyclerView.Adapter<Transport
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getDemandAggrementId() {
+        return demandAggrementId;
+    }
+
+    public void setDemandAggrementId(String demandAggrementId) {
+        this.demandAggrementId = demandAggrementId;
     }
 }

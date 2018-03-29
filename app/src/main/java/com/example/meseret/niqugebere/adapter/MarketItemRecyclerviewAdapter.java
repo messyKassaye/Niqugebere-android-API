@@ -1,7 +1,14 @@
 package com.example.meseret.niqugebere.adapter;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -31,7 +38,7 @@ public class MarketItemRecyclerviewAdapter extends RecyclerView.Adapter<MarketIt
     private List<MarketItemsAdapterModel> albumList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView product_name,unit_price;
+        public TextView product_name,unit_price,posted_by;
         public ImageView product_phtoto;
         public Button contact;
         public CardView cardView;
@@ -42,6 +49,7 @@ public class MarketItemRecyclerviewAdapter extends RecyclerView.Adapter<MarketIt
             product_phtoto = (ImageView) view.findViewById(R.id.product_photo);
             unit_price=(TextView)view.findViewById(R.id.product_price);
             contact=(Button)view.findViewById(R.id.contact);
+            posted_by=(TextView)view.findViewById(R.id.posted_by);
         }
     }
 
@@ -75,8 +83,11 @@ public class MarketItemRecyclerviewAdapter extends RecyclerView.Adapter<MarketIt
                 + "<font COLOR=\'#05B070\'>" +model.getProduct_name() + "</font>";
         String unit_price="<font COLOR=\'#ffffff\'><b>" + "Price:  " + "</b></font>"
                 + "<font COLOR=\'#05B070\'>" +model.getUnit_price() + "</font>";
+        String posted_by="<font COLOR=\'#ffffff\'><b>" + "Posted by:  " + "</b></font>"
+                + "<font COLOR=\'#05B070\'>" +model.getName() + "</font>";
         holder.product_name.setText(Html.fromHtml(product_name));
         holder.unit_price.setText(Html.fromHtml(unit_price));
+        holder.posted_by.setText(Html.fromHtml(posted_by));
         holder.contact.setTag(model.getId());
         // loading album cover using Glide library
         //Glide.with(mContext).load(ProjectStatic.IMAPGE_PATH+model.getPhoto_path()).into(holder.mall_phtoto);
@@ -84,7 +95,32 @@ public class MarketItemRecyclerviewAdapter extends RecyclerView.Adapter<MarketIt
         holder.contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try{
+                    if(Build.VERSION.SDK_INT > 22)
+                    {
+                        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            Activity activity=(Activity)(AppCompatActivity)holder.contact.getContext();
+                            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE}, 101);
 
+                            return;
+                        }
+
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:0944181080"));
+                        mContext.startActivity(callIntent);
+
+                    }
+                    else {
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:0944181080"));
+                        mContext.startActivity(callIntent);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
 
             }
         });

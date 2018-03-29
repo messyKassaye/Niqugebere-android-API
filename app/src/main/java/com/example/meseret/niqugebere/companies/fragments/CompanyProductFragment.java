@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -58,7 +59,6 @@ public class CompanyProductFragment extends Fragment {
         view= inflater.inflate(R.layout.fragment_company_product, container, false);
 
         preferences=getActivity().getSharedPreferences("company_data",0);
-
         list=new ArrayList<>();
         adapter=new ProductRecyclerviewAdapter(getActivity(),list);
         recyclerView=(RecyclerView)view.findViewById(R.id.product_recyclerview);
@@ -76,9 +76,10 @@ public class CompanyProductFragment extends Fragment {
                     for (int i=0;i<response.body().size();i++){
                         ProductAdapterModel model=new ProductAdapterModel();
                         model.setId(response.body().get(i).getId());
+                        model.setCategory_name(response.body().get(i).getCategory_name());
                         model.setName(response.body().get(i).getName());
                         model.setPhoto(response.body().get(i).getPhoto());
-                        model.setProduct_id(response.body().get(i).getProduct_id());
+                        model.setPrice(response.body().get(i).getPrice());
                         list.add(model);
                     }
                     adapter.notifyDataSetChanged();
